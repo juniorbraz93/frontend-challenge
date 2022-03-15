@@ -1,0 +1,16 @@
+export const Colors = {
+  grayD8: '#D8D8D8',
+  grayDE: '#DEDEDE',
+  grayEA: '#EAEAEA',
+  gray5: '#555555',
+  gray1: '#111111',
+  gray3: '#333333',
+  gray8: '#888888',
+  black: '#1D1D1B',
+  blackSearch: '#000000',
+  white: '#FFFFFF',
+  orangeDiscount: '#F79552',
+  green: '#7EBC43',
+  pink: '#C81A78',
+  blue: '#00B495',
+};
