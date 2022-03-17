@@ -26,11 +26,13 @@ export const ViewPriceDescription = styled.View`
 export const ViewNameCheckoutProduct = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  margin-bottom: 8px;
 `;
 
 export const NameCheckoutProduct = styled.Text`
-  font-size: 20px;
+  flex: 0.8;
+  font-size: 16px;
+  line-height: 24px;
+  font-family: Neo-Sans-Std-Regular;
   color: ${Colors.gray1};
 `;
 
@@ -38,7 +40,7 @@ export const RemoveProduct = styled.TouchableOpacity``;
 
 export const ViewDescriptionCheckoutProduct = styled.View`
   flex-direction: row;
-  margin-bottom: 16px;
+  padding-vertical: 8px;
 `;
 
 export const DescriptionCheckoutProduct = styled.Text`
@@ -55,6 +57,7 @@ export const ViewAreaPrice = styled.View`
 export const ViewPrice = styled.View``;
 
 export const PriceNoMember = styled.Text`
+  padding-vertical: 6px;
   font-size: 12px;
   font-weight: 400;
   text-decoration-line: line-through;
@@ -73,14 +76,14 @@ export const TextRSPrice = styled.Text`
   font-weight: 700;
   font-size: 15px;
   line-height: 24px;
-  color: ${Colors.pink};
+  color: ${Colors.blue3};
 `;
 
 export const PriceMember = styled.Text`
   font-weight: bold;
   font-size: 24px;
   line-height: 24px;
-  color: ${Colors.pink};
+  color: ${Colors.blue3};
 `;
 
 export const ViewQuantity = styled.View`

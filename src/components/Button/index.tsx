@@ -2,13 +2,19 @@ import React from 'react';
 
 import {ContainerButton, AreaButton, TextButton} from './styles';
 
-import {storageSetItem} from '../../utils/AsyncStorage';
+import {ActivityIndicator} from 'react-native';
+import {Colors} from '../../config/Colors';
 
-const Button = ({data}: any) => {
+const Button = ({data, setItem, loading}: any) => {
+  // storageSetItem(String(data.id), body)
   return (
     <ContainerButton>
-      <AreaButton onPress={() => storageSetItem(String(data.id), data)}>
-        <TextButton>Adicionar</TextButton>
+      <AreaButton onPress={() => setItem(data)}>
+        {loading ? (
+          <ActivityIndicator key={data.id} color={Colors.white} />
+        ) : (
+          <TextButton>Adicionar</TextButton>
+        )}
       </AreaButton>
     </ContainerButton>
   );

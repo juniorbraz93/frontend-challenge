@@ -44,6 +44,7 @@ export const ViewNumberWineBox = styled.View`
 export const TextNumberWineBox = styled.Text`
   color: ${Colors.blue};
   font-size: 12px;
+  font-family: Lato-Regular;
   font-weight: 400;
 `;
 
@@ -70,7 +71,8 @@ export const NameProduct = styled.Text`
   margin-right: 23px;
   margin-top: 8px;
   font-size: 18px;
-  font-weight: bold;
+  font-weight: 400;
+  font-family: Neo-Sans-Std-Regular;
   text-align: center;
   color: ${Colors.gray3};
 `;
@@ -86,6 +88,7 @@ export const ViewFlag = styled.View`
 
 export const TextFlag = styled.Text`
   font-size: 14px;
+  font-family: Lato-Regular;
   font-weight: 400;
   color: ${Colors.gray3};
   margin-right: 8px;
@@ -101,11 +104,12 @@ export const ViewTitleDescription = styled.View`
 
 export const TitleDescription = styled.Text`
   font-size: 20px;
-  font-weight: bold;
+  font-family: Neo-Sans-Std-Bold;
+  font-weight: 700;
   color: ${Colors.gray3};
 `;
 
-export const ViewDescription = styled.View`
+export const ViewDescription = styled.ScrollView`
   width: 343px;
   height: 168px;
   margin-left: 17px;
@@ -115,6 +119,7 @@ export const ViewDescription = styled.View`
 
 export const Description = styled.Text`
   font-size: 16px;
+  font-family: Lato-Regular;
   font-weight: 400;
   color: ${Colors.gray5};
 `;
@@ -150,6 +155,7 @@ export const ViewDescount = styled.View`
 
 export const TextDiscount = styled.Text`
   font-size: 10px;
+  font-family: Lato-Bold;
   font-weight: 700;
   text-align: center;
   color: ${Colors.white};
@@ -163,6 +169,7 @@ export const ViewPrice = styled.View`
 
 export const TextPrice = styled.Text`
   font-size: 12px;
+  font-family: Lato-Bold;
   font-weight: 700;
   text-align: right;
   line-height: 12px;
@@ -180,6 +187,7 @@ export const ViewMemberPrice = styled.View`
 
 export const TextRSPrice = styled.Text`
   font-weight: 700;
+  font-family: Lato-Bold;
   font-size: 10px;
   color: ${Colors.pink};
   position: absolute;
@@ -187,7 +195,8 @@ export const TextRSPrice = styled.Text`
 `;
 
 export const TextMemberPrice = styled.Text`
-  font-weight: bold;
+  font-weight: 700;
+  font-family: Lato-Bold;
   font-size: 20px;
   color: ${Colors.pink};
   margin-left: 17px;
@@ -201,6 +210,7 @@ export const ViewNoMember = styled.View`
 
 export const TextNoMember = styled.Text`
   font-weight: 700;
+  font-family: Lato-Bold;
   font-size: 10px;
   text-transform: uppercase;
   color: ${Colors.gray5};
@@ -221,7 +231,8 @@ export const AreaButton = styled.TouchableOpacity`
 
 export const TextButton = styled.Text`
   width: 70px;
-  height: 24px;
-  height: 16px;
+  line-height: 24px;
+  font-size: 16px;
+  font-family: Lato-Bold;
   color: ${Colors.white};
 `;

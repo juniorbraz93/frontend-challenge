@@ -23,11 +23,13 @@ import {
   TextNumberWineBox,
 } from './styles';
 import {Colors} from '../../config/Colors';
+import useCheckout from '../../hooks/useCheckout';
 
 const Home: React.FC = () => {
+  const {setItem, loading} = useCheckout();
   const {products, numberProduct} = useFetchProduct();
+  const {totalItems} = useCheckout();
   const navigation: string | any = useNavigation();
-
   return (
     <Container>
       <ViewHeader>
@@ -38,7 +40,7 @@ const Home: React.FC = () => {
           <ViewWineBox>
             <ImgWineBox source={require('../../config/image/winebox.png')} />
             <ViewNumberWineBox>
-              <TextNumberWineBox>0</TextNumberWineBox>
+              <TextNumberWineBox>{totalItems}</TextNumberWineBox>
             </ViewNumberWineBox>
           </ViewWineBox>
         </Checkout>
@@ -63,7 +65,9 @@ const Home: React.FC = () => {
         numColumns={2}
         contentContainerStyle={styles.flatList}
         showsVerticalScrollIndicator={false}
-        renderItem={({item}) => <Product data={item} />}
+        renderItem={({item}) => (
+          <Product data={item} setItem={setItem} loading={loading} />
+        )}
       />
     </Container>
   );

@@ -13,4 +13,5 @@ export const Colors = {
   green: '#7EBC43',
   pink: '#C81A78',
   blue: '#00B495',
+  blue3: '#3f51b5',
 };

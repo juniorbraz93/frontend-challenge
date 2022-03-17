@@ -51,6 +51,7 @@ export const NameProduct = styled.Text`
   margin-bottom: 12px;
   color: ${Colors.gray1};
   font-size: 14px;
+  font-family: Lato-Bold;
   line-height: 17px;
   font-weight: 700;
   text-align: center;
@@ -67,7 +68,8 @@ export const ViewPrice = styled.View`
 `;
 
 export const TextPrice = styled.Text`
-  font-size: 12px;
+  font-size: 10px;
+  font-family: Lato-Regular;
   font-weight: 400;
   text-align: right;
   line-height: 12px;
@@ -87,6 +89,7 @@ export const ViewDescount = styled.View`
 
 export const TextDiscount = styled.Text`
   font-size: 12px;
+  font-family: Lato-Regular;
   font-weight: 400;
   text-align: center;
   color: ${Colors.white};
@@ -102,6 +105,7 @@ export const ViewMember = styled.View`
 
 export const TextMember = styled.Text`
   font-style: normal;
+  font-family: Lato-Light;
   font-weight: 400;
   font-size: 10px;
   line-height: 10px;
@@ -114,12 +118,23 @@ export const ViewMemberPrice = styled.View`
   margin: 2px;
   justify-content: center;
   align-items: center;
+  flex-direction: row;
+`;
+
+export const TextRSPrice = styled.Text`
+  font-weight: bold;
+  font-size: 8px;
+  font-family: OpenSans-Bold;
+  line-height: 28px;
+  bottom: -2px;
+  color: ${Colors.pink};
 `;
 
 export const TextMemberPrice = styled.Text`
-  font-weight: 400;
+  font-weight: 700;
   font-size: 14px;
-  line-height: 16px;
+  font-family: OpenSans-Bold;
+  line-height: 28px;
   color: ${Colors.pink};
 `;
 
@@ -131,7 +146,8 @@ export const ViewNoMember = styled.View`
 
 export const TextNoMember = styled.Text`
   font-weight: 400;
-  font-size: 12px;
+  font-family: Lato-Regular;
+  font-size: 10px;
   line-height: 28px;
   color: ${Colors.gray8};
 `;

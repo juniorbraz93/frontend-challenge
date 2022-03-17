@@ -23,9 +23,10 @@ import {
   ViewNoMember,
   TextNoMember,
   ViewAreaProduct,
+  TextRSPrice,
 } from './styles';
 
-const Product = ({data}: any) => {
+const Product = ({data, setItem, loading}: any) => {
   const navigation: string | any = useNavigation();
 
   return (
@@ -49,7 +50,14 @@ const Product = ({data}: any) => {
           <NameProduct>{data.name}</NameProduct>
           <ViewAreaPrice>
             <ViewPrice>
-              <TextPrice>R$ {data.price}</TextPrice>
+              <TextPrice>
+                R${' '}
+                {data.price.toLocaleString('pt-BR', {
+                  // Ajustando casas decimais
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </TextPrice>
             </ViewPrice>
             <ViewDescount>
               <TextDiscount>{data.discount} % OFF</TextDiscount>
@@ -60,23 +68,29 @@ const Product = ({data}: any) => {
               <TextMember>Sócio wine</TextMember>
             </ViewMember>
             <ViewMemberPrice>
-              <TextMemberPrice>R$ {data.priceMember}</TextMemberPrice>
+              <TextRSPrice>R$ </TextRSPrice>
+              <TextMemberPrice>
+                {data.priceMember.toLocaleString('pt-BR', {
+                  // Ajustando casas decimais
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </TextMemberPrice>
             </ViewMemberPrice>
           </ViewAreaPrice>
           <ViewNoMember>
             <TextNoMember>
               Não sócio R${' '}
               {data.priceNonMember.toLocaleString('pt-BR', {
+                // Ajustando casas decimais
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
-                style: 'currency',
-                currency: 'BRL',
               })}
             </TextNoMember>
           </ViewNoMember>
         </ViewAreaProduct>
       </CardProduct>
-      <Button data={data} />
+      <Button data={data} setItem={setItem} loading={loading} />
     </ContainerProduct>
   );
 };

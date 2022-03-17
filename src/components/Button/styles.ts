@@ -17,7 +17,9 @@ export const AreaButton = styled.TouchableOpacity`
 `;
 
 export const TextButton = styled.Text`
-  width: 62px;
-  height: 16px;
+  font-family: Lato-Bold;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 16px;
   color: ${Colors.white};
 `;

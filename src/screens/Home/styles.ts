@@ -43,6 +43,7 @@ export const TextNumberWineBox = styled.Text`
   color: ${Colors.blue};
   font-size: 12px;
   font-weight: 400;
+  font-family: Lato-Regular;
 `;
 
 export const ImgWineBox = styled.Image`
@@ -62,6 +63,7 @@ export const ViewSearch = styled.View`
 
 export const Search = styled.TextInput`
   font-size: 14px;
+  font-family: Lato-Regular;
   height: 40px;
   width: 100%;
   color: ${Colors.gray5};
@@ -76,6 +78,7 @@ export const ViewTextProduct = styled.View`
 
 export const TotalTextProduct = styled.Text`
   font-size: 16px;
+  font-family: Neo-Sans-Std-Regular;
   color: ${Colors.gray5};
   line-height: 24px;
   font-weight: 400;

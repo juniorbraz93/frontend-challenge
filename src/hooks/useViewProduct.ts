@@ -3,6 +3,7 @@ import api from '../services/api';
 
 export default function useViewProduct(props: any) {
   const [products, setProducts]: any = useState([]);
+  const [addProducts, setAddProducts]: any = useState([]);
 
   useEffect(() => {
     async function loadProducts() {
@@ -11,12 +12,52 @@ export default function useViewProduct(props: any) {
           `products?name=${props.name}&limit=${props.id + 1}`,
         );
 
-        setProducts(response.data.items[0]);
+        // response.data.items[0]
+
+        const body = {
+          id: response.data.items[0].id,
+          image: response.data.items[0].image,
+          name: response.data.items[0].name,
+          price: response.data.items[0].price.toLocaleString('pt-BR', {
+            // Ajustando casas decimais
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+          }),
+          discount: response.data.items[0].discount,
+          priceMember: response.data.items[0].priceMember.toLocaleString(
+            'pt-BR',
+            {
+              // Ajustando casas decimais
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            },
+          ),
+          priceNonMember: response.data.items[0].priceNonMember.toLocaleString(
+            'pt-BR',
+            {
+              // Ajustando casas decimais
+              minimumFractionDigits: 2,
+              maximumFractionDigits: 2,
+            },
+          ),
+          type: response.data.items[0].type,
+          classification: response.data.items[0].classification,
+          size: response.data.items[0].size || response.data.items[0].volume,
+          rating: response.data.items[0].rating,
+          avaliations: response.data.items[0].avaliations,
+          country: response.data.items[0].country,
+          region: response.data.items[0].region,
+          flag: response.data.items[0].flag,
+          sommelierComment: response.data.items[0].sommelierComment,
+        };
+
+        setAddProducts(response.data.items[0]);
+        setProducts(body);
       } catch (error) {}
     }
 
     loadProducts();
   }, [props.id, props.name]);
 
-  return {products};
+  return {products, addProducts};
 }

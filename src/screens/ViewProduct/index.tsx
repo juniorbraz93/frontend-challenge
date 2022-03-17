@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, StyleSheet} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -40,9 +40,11 @@ import {
 
 import useViewProduct from '../../hooks/useViewProduct';
 import {Colors} from '../../config/Colors';
+import useCheckout from '../../hooks/useCheckout';
 
 const ViewProduct: React.FC = ({route}: any) => {
-  const {products} = useViewProduct(route.params);
+  const {products, addProducts} = useViewProduct(route.params);
+  const {setItem, totalItems} = useCheckout();
   const navigation: string | any = useNavigation();
 
   return (
@@ -61,7 +63,6 @@ const ViewProduct: React.FC = ({route}: any) => {
                 color={Colors.blackSearch}
               />
             </ViewBack>
-            {/* <ImgBack source={require('../../config/image/back.png')} /> */}
           </AreaBack>
           <Checkout
             title="Checkout"
@@ -69,7 +70,7 @@ const ViewProduct: React.FC = ({route}: any) => {
             <ViewWineBox>
               <ImgWineBox source={require('../../config/image/winebox.png')} />
               <ViewNumberWineBox>
-                <TextNumberWineBox>0</TextNumberWineBox>
+                <TextNumberWineBox>{totalItems}</TextNumberWineBox>
               </ViewNumberWineBox>
             </ViewWineBox>
           </Checkout>
@@ -86,7 +87,7 @@ const ViewProduct: React.FC = ({route}: any) => {
         <ViewTitleDescription>
           <TitleDescription>Descrição</TitleDescription>
         </ViewTitleDescription>
-        <ViewDescription>
+        <ViewDescription showsVerticalScrollIndicator={false}>
           <Description>{products.sommelierComment}</Description>
         </ViewDescription>
       </Container>
@@ -108,7 +109,7 @@ const ViewProduct: React.FC = ({route}: any) => {
             </TextNoMember>
           </ViewNoMember>
         </ViewPriceButton>
-        <AreaButton>
+        <AreaButton onPress={() => setItem(addProducts)}>
           <TextButton>Adicionar</TextButton>
         </AreaButton>
       </ViewAddCar>

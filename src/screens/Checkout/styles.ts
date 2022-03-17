@@ -3,7 +3,7 @@ import {Colors} from '../../config/Colors';
 
 export const Container = styled.View`
   flex: 1;
-  background-color: ${Colors.white};
+  background-color: ${Colors.grayDE};
 `;
 
 export const HeaderProduct = styled.View`
@@ -41,12 +41,15 @@ export const AreaOrderPrice = styled.View`
   bottom: 0;
   flex: 1;
   width: 100%;
+  background-color: ${Colors.white};
 `;
 
 export const ViewCupon = styled.View`
   flex-direction: row;
   justify-content: space-between;
-  padding-horizontal: 16px;
+  flex: 1;
+  margin-horizontal: 16px;
+  margin-vertical: 16px;
 `;
 
 export const AreaCupon = styled.View`
@@ -73,6 +76,8 @@ export const ViewButtonCupon = styled.View`
 
 export const AreaButtonCupon = styled.TouchableOpacity`
   flex-direction: row;
+  justify-content: center;
+  align-items: baseline;
 `;
 
 export const TextButtonCupon = styled.Text`
@@ -118,7 +123,7 @@ export const Delivery = styled.Text`
 `;
 
 export const AreaSpace = styled.View`
-  height: 10px;
+  height: 6px;
   background-color: ${Colors.grayDE};
 `;
 
