@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {Colors} from '../../config/Colors';
 
 export const Container = styled.ScrollView`

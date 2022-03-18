@@ -26,7 +26,13 @@ import {
   TextRSPrice,
 } from './styles';
 
-const Product = ({data, setItem, loading}: any) => {
+const Product = ({
+  data,
+  setItem,
+  loading,
+  onPressAddItem,
+  productIndex,
+}: any) => {
   const navigation: string | any = useNavigation();
 
   return (
@@ -53,7 +59,7 @@ const Product = ({data, setItem, loading}: any) => {
               <TextPrice>
                 R${' '}
                 {data.price.toLocaleString('pt-BR', {
-                  // Ajustando casas decimais
+                  // //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -71,7 +77,7 @@ const Product = ({data, setItem, loading}: any) => {
               <TextRSPrice>R$ </TextRSPrice>
               <TextMemberPrice>
                 {data.priceMember.toLocaleString('pt-BR', {
-                  // Ajustando casas decimais
+                  // //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -82,7 +88,7 @@ const Product = ({data, setItem, loading}: any) => {
             <TextNoMember>
               Não sócio R${' '}
               {data.priceNonMember.toLocaleString('pt-BR', {
-                // Ajustando casas decimais
+                // //
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
@@ -90,7 +96,13 @@ const Product = ({data, setItem, loading}: any) => {
           </ViewNoMember>
         </ViewAreaProduct>
       </CardProduct>
-      <Button data={data} setItem={setItem} loading={loading} />
+      <Button
+        data={data}
+        setItem={setItem}
+        loading={loading}
+        onPressAddItem={onPressAddItem}
+        productIndex={productIndex}
+      />
     </ContainerProduct>
   );
 };

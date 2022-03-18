@@ -1,20 +1,32 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {Colors} from '../../config/Colors';
+
+export const ViewLoading = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const Container = styled.View`
   flex: 1;
   background-color: ${Colors.grayDE};
 `;
 
+export const ViewMarginSpace = styled.View`
+  height: 1px;
+  background-color: ${Colors.grayDE};
+  margin: 16px;
+`;
+
 export const HeaderProduct = styled.View`
-  margin-top: 5px;
-  height: 50px;
+  height: 60px;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 20px;
+  background-color: ${Colors.white};
 `;
 
 export const HeaderTitle = styled.Text`
+  font-family: Lato-Bold;
   font-size: 20px;
   margin-left: 8px;
   font-weight: bold;
@@ -29,9 +41,6 @@ export const ViewBack = styled.View`
 
 export const AreaBack = styled.TouchableOpacity``;
 
-export const Back = styled.Text`
-  font-size: 20px;
-`;
 export const ViewWineBox = styled.View`
   flex: 1;
 `;
@@ -39,30 +48,33 @@ export const ViewWineBox = styled.View`
 export const AreaOrderPrice = styled.View`
   position: absolute;
   bottom: 0;
+  height: 100px;
   flex: 1;
   width: 100%;
   background-color: ${Colors.white};
 `;
 
 export const ViewCupon = styled.View`
+  background-color: ${Colors.white};
   flex-direction: row;
   justify-content: space-between;
   flex: 1;
-  margin-horizontal: 16px;
-  margin-vertical: 16px;
+  padding: 16px;
 `;
 
 export const AreaCupon = styled.View`
   flex-direction: row;
+  align-items: center;
 `;
 
 export const ImgCupon = styled.Image`
   width: 24px;
   height: 24px;
-  margin: 5px;
+  margin-right: 6px;
 `;
 
 export const TextCupon = styled.Text`
+  font-family: Lato-Bold;
   margin: 5px;
   font-size: 16px;
   color: ${Colors.black};
@@ -81,6 +93,7 @@ export const AreaButtonCupon = styled.TouchableOpacity`
 `;
 
 export const TextButtonCupon = styled.Text`
+  font-family: Lato-Bold;
   margin: 5px;
   font-size: 16px;
   color: ${Colors.pink};
@@ -89,11 +102,12 @@ export const TextButtonCupon = styled.Text`
 `;
 
 export const AreaOrderSummary = styled.View`
-  padding-horizontal: 16px;
-  padding-vertical: 8px;
+  padding: 16px;
+  background-color: ${Colors.white};
 `;
 
 export const TitleOrderSummary = styled.Text`
+  font-family: Lato-Bold;
   font-size: 16px;
   color: ${Colors.gray5};
   line-height: 24px;
@@ -106,6 +120,7 @@ export const ViewOrderSummary = styled.View`
 `;
 
 export const OrderSummary = styled.Text`
+  font-family: Lato-Regular;
   color: ${Colors.gray5};
   line-height: 24px;
   font-weight: 400;
@@ -117,6 +132,7 @@ export const ViewDelivery = styled.View`
 `;
 
 export const Delivery = styled.Text`
+  font-family: Lato-Regular;
   color: ${Colors.gray5};
   line-height: 24px;
   font-weight: 400;
@@ -128,23 +144,22 @@ export const AreaSpace = styled.View`
 `;
 
 export const AreaCheckout = styled.View`
-  height: 80px;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 20px;
   padding-horizontal: 16px;
+  height: 100%;
+  align-items: center;
 `;
 
 export const ViewPrice = styled.View``;
 
 export const ViewMemberPrice = styled.View`
-  margin: 1px;
   flex-direction: row;
   width: 130px;
-  height: 28px;
 `;
 
 export const TextRSPrice = styled.Text`
+  font-family: OpenSans-Bold;
   font-weight: 700;
   font-size: 15px;
   color: ${Colors.pink};
@@ -152,6 +167,7 @@ export const TextRSPrice = styled.Text`
 `;
 
 export const TitlePrice = styled.Text`
+  font-family: Lato-Bold;
   font-size: 16px;
   color: ${Colors.gray5};
   line-height: 24px;
@@ -177,8 +193,6 @@ export const AreaButton = styled.TouchableOpacity`
   align-items: center;
   border-radius: 4px;
   background-color: ${Colors.pink};
-  margin-right: 16px;
-  margin-top: 16px;
 `;
 
 export const TextButton = styled.Text`

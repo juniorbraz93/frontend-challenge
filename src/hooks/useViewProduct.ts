@@ -12,14 +12,14 @@ export default function useViewProduct(props: any) {
           `products?name=${props.name}&limit=${props.id + 1}`,
         );
 
-        // response.data.items[0]
+        //
 
         const body = {
           id: response.data.items[0].id,
           image: response.data.items[0].image,
           name: response.data.items[0].name,
           price: response.data.items[0].price.toLocaleString('pt-BR', {
-            // Ajustando casas decimais
+            //
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
           }),
@@ -27,7 +27,7 @@ export default function useViewProduct(props: any) {
           priceMember: response.data.items[0].priceMember.toLocaleString(
             'pt-BR',
             {
-              // Ajustando casas decimais
+              //
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             },
@@ -35,7 +35,7 @@ export default function useViewProduct(props: any) {
           priceNonMember: response.data.items[0].priceNonMember.toLocaleString(
             'pt-BR',
             {
-              // Ajustando casas decimais
+              //
               minimumFractionDigits: 2,
               maximumFractionDigits: 2,
             },

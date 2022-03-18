@@ -16,7 +16,7 @@ export default function useCheckout() {
   let value = 0;
   let quantity = 0;
 
-  async function get() {
+  async function listItens() {
     setLoading(true);
     const getItem = await storageGetAll();
     const cartItems = await getMultiple(getItem);
@@ -36,7 +36,7 @@ export default function useCheckout() {
 
   async function setItem(data: any, key?: string) {
     setLoading(true);
-    const item = await storageGetItem(String(data.id));
+    const item: string | any = await storageGetItem(String(data.id));
 
     const parseItem = JSON.parse(item);
 
@@ -71,8 +71,8 @@ export default function useCheckout() {
   }
 
   useEffect(() => {
-    get();
+    listItens();
   }, []);
 
-  return {getItems, setItem, loading, totalValue, totalItems};
+  return {getItems, setItem, loading, totalValue, totalItems, listItens};
 }

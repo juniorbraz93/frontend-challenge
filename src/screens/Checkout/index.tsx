@@ -31,28 +31,45 @@ import {
   AreaSpace,
   ViewMemberPrice,
   TextRSPrice,
+  ViewMarginSpace,
+  ViewLoading,
 } from './styles';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Colors} from '../../config/Colors';
 import CardCheckout from '../../components/CardCheckout';
 import Feather from 'react-native-vector-icons/Feather';
-import {FlatList, Modal, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, FlatList, Modal, StyleSheet} from 'react-native';
 import Cupon from '../../components/Cupon';
 import {storageClear} from '../../utils/AsyncStorage';
 import useCheckout from '../../hooks/useCheckout';
 
 const Checkout: React.FC = () => {
   const navigation = useNavigation();
-  const {getItems, totalValue, totalItems} = useCheckout();
+  const {getItems, totalValue, totalItems, listItens, setItem, loading} =
+    useCheckout();
 
   const [visibleCupon, setVisibleCupon] = useState(false);
 
+  function onPressAddItem(data: {quantity: number}, key: string | undefined) {
+    if (data.quantity >= 1) {
+      setItem(data, key);
+      return listItens();
+    }
+  }
+
+  if (loading && totalItems === 0) {
+    return (
+      <ViewLoading>
+        <ActivityIndicator size={40} color={Colors.blackSearch} />
+      </ViewLoading>
+    );
+  }
+
   return (
-    <Container>
-      <View style={{backgroundColor: Colors.white, flex: 1}}>
+    <>
+      <Container>
         <HeaderProduct>
           <AreaBack
-            title="Back"
             onPress={() => {
               navigation.goBack();
             }}>
@@ -71,12 +88,10 @@ const Checkout: React.FC = () => {
           data={getItems}
           keyExtractor={item => item.id}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{paddingBottom: 120}}
-          ItemSeparatorComponent={() => (
-            <View
-              style={{height: 1, backgroundColor: Colors.grayDE, margin: 16}}
-            />
-          )}
+          contentContainerStyle={styles.contentContainerStyle}
+          style={styles.flatList}
+          ItemSeparatorComponent={() => <ViewMarginSpace />}
+          ListFooterComponentStyle={styles.ListFooterComponentStyle}
           ListFooterComponent={() => (
             <>
               <AreaSpace />
@@ -90,12 +105,7 @@ const Checkout: React.FC = () => {
                 <ViewButtonCupon>
                   <AreaButtonCupon onPress={() => setVisibleCupon(true)}>
                     <TextButtonCupon>Adicionar</TextButtonCupon>
-                    <Feather
-                      name="arrow-right"
-                      size={16}
-                      color={Colors.pink}
-                      style={styles.arrow}
-                    />
+                    <Feather name="arrow-right" size={16} color={Colors.pink} />
                   </AreaButtonCupon>
                 </ViewButtonCupon>
               </ViewCupon>
@@ -103,11 +113,13 @@ const Checkout: React.FC = () => {
               <AreaOrderSummary>
                 <TitleOrderSummary>Resumo do Pedido</TitleOrderSummary>
                 <ViewOrderSummary>
-                  <OrderSummary>Produtos({totalItems} item)</OrderSummary>
+                  <OrderSummary>
+                    Produtos ({totalItems} {totalItems > 1 ? 'itens' : 'item'})
+                  </OrderSummary>
                   <OrderSummary>
                     R${' '}
                     {totalValue.toLocaleString('pt-BR', {
-                      // Ajustando casas decimais
+                      //
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
@@ -120,12 +132,22 @@ const Checkout: React.FC = () => {
               </AreaOrderSummary>
             </>
           )}
-          renderItem={({item}) => <CardCheckout data={item} />}
+          renderItem={({item, index}) => (
+            <CardCheckout
+              onPressAddItem={onPressAddItem}
+              lastIndex={getItems.length - 1 === index}
+              data={item}
+              loading={loading}
+            />
+          )}
         />
         {/* Aqui vai um FlatList */}
-      </View>
+
+        <Modal transparent={true} animationType="slide" visible={visibleCupon}>
+          <Cupon back={() => setVisibleCupon(false)} />
+        </Modal>
+      </Container>
       <AreaOrderPrice>
-        <AreaSpace />
         <AreaCheckout>
           <ViewPrice>
             <TitlePrice>Subtotal</TitlePrice>
@@ -133,7 +155,7 @@ const Checkout: React.FC = () => {
               <TextRSPrice>R$ </TextRSPrice>
               <Price>
                 {totalValue.toLocaleString('pt-BR', {
-                  // Ajustando casas decimais
+                  //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -149,20 +171,21 @@ const Checkout: React.FC = () => {
           </ViewButton>
         </AreaCheckout>
       </AreaOrderPrice>
-      <Modal transparent={true} animationType="slide" visible={visibleCupon}>
-        <Cupon back={() => setVisibleCupon(false)} />
-      </Modal>
-    </Container>
+    </>
   );
 };
 
 export default Checkout;
 
 const styles = StyleSheet.create({
-  arrow: {
-    // margin: 5,
-    // bottom: 2,
-    // position: 'absolute',
-    // right: -20,
+  contentContainerStyle: {
+    marginBottom: 20,
+  },
+  flatList: {
+    backgroundColor: Colors.white,
+    marginBottom: 100,
+  },
+  ListFooterComponentStyle: {
+    backgroundColor: Colors.grayDE,
   },
 });

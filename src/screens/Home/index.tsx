@@ -1,5 +1,5 @@
-import React from 'react';
-import {FlatList, StyleSheet} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 
 import Product from '../../components/Product';
@@ -21,26 +21,55 @@ import {
   ViewWineBox,
   ViewNumberWineBox,
   TextNumberWineBox,
+  ViewLoadingPage,
+  ViewListFooterComponent,
 } from './styles';
 import {Colors} from '../../config/Colors';
 import useCheckout from '../../hooks/useCheckout';
 
 const Home: React.FC = () => {
-  const {setItem, loading} = useCheckout();
-  const {products, numberProduct} = useFetchProduct();
-  const {totalItems} = useCheckout();
+  const {products, numberProduct, loadProducts, loadingProducts} =
+    useFetchProduct();
+  const {totalItems, listItens, setItem, loading} = useCheckout();
   const navigation: string | any = useNavigation();
+  const [limit, setLimit] = useState(10);
+
+  useEffect(() => {
+    loadProducts('');
+  }, [loadProducts]);
+
+  function onPressAddItem(data: any, key: string | undefined) {
+    setItem(data, key);
+    return listItens();
+  }
+
+  function getMoreProducts() {
+    setLimit(limit + 10);
+
+    return loadProducts('', 1, limit);
+  }
+
+  if (loading) {
+    return (
+      <ViewLoadingPage>
+        <ActivityIndicator size={40} color={Colors.blackSearch} />
+      </ViewLoadingPage>
+    );
+  }
+
   return (
     <Container>
       <ViewHeader>
         <ImgLogo source={require('../../config/image/logo.png')} />
-        <Checkout
-          title="Checkout"
-          onPress={() => navigation.navigate('Checkout')}>
+        <Checkout onPress={() => navigation.navigate('Checkout')}>
           <ViewWineBox>
             <ImgWineBox source={require('../../config/image/winebox.png')} />
             <ViewNumberWineBox>
-              <TextNumberWineBox>{totalItems}</TextNumberWineBox>
+              {loading ? (
+                <ActivityIndicator size={12} color={Colors.blue} />
+              ) : (
+                <TextNumberWineBox>{totalItems}</TextNumberWineBox>
+              )}
             </ViewNumberWineBox>
           </ViewWineBox>
         </Checkout>
@@ -52,7 +81,10 @@ const Home: React.FC = () => {
           size={20}
           color={Colors.blackSearch}
         />
-        <Search placeholder="O que você está procurando?" />
+        <Search
+          placeholder="O que você está procurando?"
+          onChangeText={(value: any) => loadProducts(value)}
+        />
       </ViewSearch>
       <ViewTextProduct>
         <TotalTextProduct>
@@ -63,10 +95,27 @@ const Home: React.FC = () => {
         data={products}
         keyExtractor={item => item.id}
         numColumns={2}
+        onEndReached={getMoreProducts}
+        onEndReachedThreshold={0.1}
+        refreshing={loading}
+        onRefresh={() => loadProducts('')}
+        ListFooterComponent={() =>
+          loadingProducts && products.length > 0 ? (
+            <ViewListFooterComponent>
+              <ActivityIndicator size={24} color={Colors.blackSearch} />
+            </ViewListFooterComponent>
+          ) : null
+        }
         contentContainerStyle={styles.flatList}
         showsVerticalScrollIndicator={false}
         renderItem={({item}) => (
-          <Product data={item} setItem={setItem} loading={loading} />
+          <Product
+            productIndex={item.id}
+            data={item}
+            setItem={setItem}
+            loading={loading}
+            onPressAddItem={onPressAddItem}
+          />
         )}
       />
     </Container>

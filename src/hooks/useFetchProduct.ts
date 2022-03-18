@@ -1,22 +1,25 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import api from '../services/api';
 
 export default function useFetchProduct() {
   const [products, setProducts]: any = useState([]);
   const [numberProduct, setNumberProduct]: any = useState([]);
+  const [loadingProducts, setLoadingProducts]: any = useState(false);
 
-  async function loadProducts() {
+  async function loadProducts(name: string, page = 1, limit = 10) {
+    setLoadingProducts(true);
     try {
-      const response = await api.get('products?page=1&limit=65');
+      const response = await api.get(
+        `products?page=${page}&limit=${limit}&name=${name}`,
+      );
 
       setNumberProduct(response.data.totalItems);
       setProducts(response.data.items);
-    } catch (error) {}
+      setLoadingProducts(false);
+    } catch (error) {
+      setLoadingProducts(false);
+    }
   }
 
-  useEffect(() => {
-    loadProducts();
-  }, []);
-
-  return {products, numberProduct};
+  return {products, numberProduct, loadProducts, loadingProducts};
 }

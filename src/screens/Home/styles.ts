@@ -1,5 +1,15 @@
-import styled from 'styled-components';
+import styled from 'styled-components/native';
 import {Colors} from '../../config/Colors';
+
+export const ViewLoadingPage = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const ViewListFooterComponent = styled.View`
+  margin-bottom: 16px;
+`;
 
 export const Container = styled.View`
   flex: 1;
@@ -34,7 +44,7 @@ export const ViewNumberWineBox = styled.View`
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: -8px;
+  bottom: -4px;
   right: 16px;
   border-radius: 10px;
 `;
@@ -55,7 +65,7 @@ export const ImgWineBox = styled.Image`
 
 export const ViewSearch = styled.View`
   flex-direction: row;
-  margin-top: 15px;
+  margin-top: 24px;
   align-items: center;
   margin-horizontal: 16px;
   background-color: ${Colors.grayEA};
