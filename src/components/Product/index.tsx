@@ -26,13 +26,7 @@ import {
   TextRSPrice,
 } from './styles';
 
-const Product = ({
-  data,
-  setItem,
-  loading,
-  onPressAddItem,
-  productIndex,
-}: any) => {
+const Product = ({data, setItem, loading, onPressAddItem}: any) => {
   const navigation: string | any = useNavigation();
 
   return (
@@ -41,7 +35,6 @@ const Product = ({
         <ViewAreaImage>
           <BlackWine source={require('../../config/image/maskgroup.png')} />
           <ShowViewProduct
-            title="ViewProduct"
             onPress={() =>
               navigation.navigate('ViewProduct', {
                 name: data.name,
@@ -59,7 +52,6 @@ const Product = ({
               <TextPrice>
                 R${' '}
                 {data.price.toLocaleString('pt-BR', {
-                  // //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -77,7 +69,6 @@ const Product = ({
               <TextRSPrice>R$ </TextRSPrice>
               <TextMemberPrice>
                 {data.priceMember.toLocaleString('pt-BR', {
-                  // //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -88,7 +79,6 @@ const Product = ({
             <TextNoMember>
               Não sócio R${' '}
               {data.priceNonMember.toLocaleString('pt-BR', {
-                // //
                 minimumFractionDigits: 2,
                 maximumFractionDigits: 2,
               })}
@@ -101,7 +91,6 @@ const Product = ({
         setItem={setItem}
         loading={loading}
         onPressAddItem={onPressAddItem}
-        productIndex={productIndex}
       />
     </ContainerProduct>
   );

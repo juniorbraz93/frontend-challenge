@@ -3,7 +3,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import Feather from 'react-native-vector-icons/Feather';
 import {Colors} from '../../config/Colors';
 import {
-  ViewCarCheckout,
+  ViewCardCheckout,
   ViewImageCardCheckout,
   ImageCarCheckout,
   ViewPriceDescription,
@@ -23,7 +23,6 @@ import {
   TextRSPrice,
   ViewLoading,
 } from './styles';
-// import useCheckout from '../../hooks/useCheckout';
 import {storageRemoveItem} from '../../utils/AsyncStorage';
 import {ActivityIndicator} from 'react-native';
 
@@ -31,7 +30,7 @@ const CardCheckout = ({data, lastIndex, onPressAddItem, loading}: any) => {
   const price = data.priceMember * data.quantity;
   return (
     <>
-      <ViewCarCheckout lastIndex={lastIndex} loading={loading}>
+      <ViewCardCheckout lastIndex={lastIndex} loading={loading}>
         <ViewImageCardCheckout>
           <ImageCarCheckout
             source={{uri: data.image}}
@@ -56,7 +55,6 @@ const CardCheckout = ({data, lastIndex, onPressAddItem, loading}: any) => {
               <PriceNoMember>
                 R${' '}
                 {data.priceNonMember.toLocaleString('pt-BR', {
-                  //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}
@@ -65,7 +63,6 @@ const CardCheckout = ({data, lastIndex, onPressAddItem, loading}: any) => {
                 <TextRSPrice>R$ </TextRSPrice>
                 <PriceMember>
                   {price.toLocaleString('pt-BR', {
-                    //
                     minimumFractionDigits: 2,
                     maximumFractionDigits: 2,
                   })}
@@ -92,7 +89,7 @@ const CardCheckout = ({data, lastIndex, onPressAddItem, loading}: any) => {
             </ViewQuantity>
           </ViewAreaPrice>
         </ViewPriceDescription>
-      </ViewCarCheckout>
+      </ViewCardCheckout>
       {loading && (
         <ViewLoading>
           <ActivityIndicator size={24} color={Colors.blackSearch} />
@@ -103,5 +100,3 @@ const CardCheckout = ({data, lastIndex, onPressAddItem, loading}: any) => {
 };
 
 export default CardCheckout;
-
-//

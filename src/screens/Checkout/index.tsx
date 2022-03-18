@@ -42,6 +42,7 @@ import {ActivityIndicator, FlatList, Modal, StyleSheet} from 'react-native';
 import Cupon from '../../components/Cupon';
 import {storageClear} from '../../utils/AsyncStorage';
 import useCheckout from '../../hooks/useCheckout';
+import {IBodyProps} from '../../types/checkout.types';
 
 const Checkout: React.FC = () => {
   const navigation = useNavigation();
@@ -50,7 +51,7 @@ const Checkout: React.FC = () => {
 
   const [visibleCupon, setVisibleCupon] = useState(false);
 
-  function onPressAddItem(data: {quantity: number}, key: string | undefined) {
+  function onPressAddItem(data: IBodyProps, key: string) {
     if (data.quantity >= 1) {
       setItem(data, key);
       return listItens();
@@ -83,7 +84,6 @@ const Checkout: React.FC = () => {
           </AreaBack>
           <HeaderTitle>Sua WineBox</HeaderTitle>
         </HeaderProduct>
-        {/* Aqui vai um FlatList */}
         <FlatList
           data={getItems}
           keyExtractor={item => item.id}
@@ -119,7 +119,6 @@ const Checkout: React.FC = () => {
                   <OrderSummary>
                     R${' '}
                     {totalValue.toLocaleString('pt-BR', {
-                      //
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
@@ -141,8 +140,6 @@ const Checkout: React.FC = () => {
             />
           )}
         />
-        {/* Aqui vai um FlatList */}
-
         <Modal transparent={true} animationType="slide" visible={visibleCupon}>
           <Cupon back={() => setVisibleCupon(false)} />
         </Modal>
@@ -155,7 +152,6 @@ const Checkout: React.FC = () => {
               <TextRSPrice>R$ </TextRSPrice>
               <Price>
                 {totalValue.toLocaleString('pt-BR', {
-                  //
                   minimumFractionDigits: 2,
                   maximumFractionDigits: 2,
                 })}

@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet} from 'react-native';
+import {ActivityIndicator, StyleSheet} from 'react-native';
 import {SvgUri} from 'react-native-svg';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
@@ -41,18 +41,26 @@ import {
 import useViewProduct from '../../hooks/useViewProduct';
 import {Colors} from '../../config/Colors';
 import useCheckout from '../../hooks/useCheckout';
+import {ViewLoadingPage} from '../Home/styles';
 
 const ViewProduct: React.FC = ({route}: any) => {
   const {products, addProducts} = useViewProduct(route.params);
-  const {setItem, totalItems} = useCheckout();
+  const {setItem, totalItems, loading} = useCheckout();
   const navigation: string | any = useNavigation();
+
+  if (loading && products.length === 0) {
+    return (
+      <ViewLoadingPage>
+        <ActivityIndicator size={40} color={Colors.blackSearch} />
+      </ViewLoadingPage>
+    );
+  }
 
   return (
     <>
       <Container>
         <HeaderProduct>
           <AreaBack
-            title="Back"
             onPress={() => {
               navigation.goBack();
             }}>
@@ -64,13 +72,15 @@ const ViewProduct: React.FC = ({route}: any) => {
               />
             </ViewBack>
           </AreaBack>
-          <Checkout
-            title="Checkout"
-            onPress={() => navigation.navigate('Checkout')}>
+          <Checkout onPress={() => navigation.navigate('Checkout')}>
             <ViewWineBox>
               <ImgWineBox source={require('../../config/image/winebox.png')} />
               <ViewNumberWineBox>
-                <TextNumberWineBox>{totalItems}</TextNumberWineBox>
+                {loading ? (
+                  <ActivityIndicator size={12} color={Colors.blue} />
+                ) : (
+                  <TextNumberWineBox>{totalItems}</TextNumberWineBox>
+                )}
               </ViewNumberWineBox>
             </ViewWineBox>
           </Checkout>
@@ -109,7 +119,7 @@ const ViewProduct: React.FC = ({route}: any) => {
             </TextNoMember>
           </ViewNoMember>
         </ViewPriceButton>
-        <AreaButton onPress={() => setItem(addProducts)}>
+        <AreaButton onPress={() => setItem(addProducts, '')}>
           <TextButton>Adicionar</TextButton>
         </AreaButton>
       </ViewAddCar>

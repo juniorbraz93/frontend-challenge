@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {Colors} from '../../config/Colors';
 
-export const ViewCarCheckout = styled.View`
+export const ViewCardCheckout = styled.View`
   flex-direction: row;
   height: 130px;
   width: 100%;

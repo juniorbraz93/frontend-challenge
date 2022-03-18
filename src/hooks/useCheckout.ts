@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {IBodyProps} from '../types/checkout.types';
 
 import {
   storageGetAll,
@@ -13,8 +14,8 @@ export default function useCheckout() {
   const [totalValue, setTotalValue] = useState(0);
   const [totalItems, setTotalItems]: any = useState(0);
 
-  let value = 0;
-  let quantity = 0;
+  let value: number = 0;
+  let quantity: number = 0;
 
   async function listItens() {
     setLoading(true);
@@ -34,7 +35,7 @@ export default function useCheckout() {
     setLoading(false);
   }
 
-  async function setItem(data: any, key?: string) {
+  async function setItem(data: IBodyProps, key: string) {
     setLoading(true);
     const item: string | any = await storageGetItem(String(data.id));
 
@@ -52,7 +53,7 @@ export default function useCheckout() {
       ? data.quantity + 1
       : 1;
 
-    const body = {
+    const body: IBodyProps = {
       id: parseItem ? parseItem.id : data.id,
       image: parseItem ? parseItem.image : data.image,
       name: parseItem ? parseItem.name : data.name,

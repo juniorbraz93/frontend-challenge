@@ -36,9 +36,9 @@ const Home: React.FC = () => {
 
   useEffect(() => {
     loadProducts('');
-  }, [loadProducts]);
+  }, []);
 
-  function onPressAddItem(data: any, key: string | undefined) {
+  function onPressAddItem(data: any, key: string) {
     setItem(data, key);
     return listItens();
   }
@@ -49,7 +49,7 @@ const Home: React.FC = () => {
     return loadProducts('', 1, limit);
   }
 
-  if (loading) {
+  if (loading && products.length === 0) {
     return (
       <ViewLoadingPage>
         <ActivityIndicator size={40} color={Colors.blackSearch} />
@@ -97,7 +97,7 @@ const Home: React.FC = () => {
         numColumns={2}
         onEndReached={getMoreProducts}
         onEndReachedThreshold={0.1}
-        refreshing={loading}
+        refreshing={loading && products.length === 0}
         onRefresh={() => loadProducts('')}
         ListFooterComponent={() =>
           loadingProducts && products.length > 0 ? (
