@@ -9,35 +9,37 @@ import {
 } from '../utils/AsyncStorage';
 
 export default function useCheckout() {
-  const [getItems, setGetItems]: any = useState([]);
+  const [getItems, setGetItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [totalValue, setTotalValue] = useState(0);
-  const [totalItems, setTotalItems]: any = useState(0);
+  const [totalItems, setTotalItems] = useState(0);
 
   let value: number = 0;
   let quantity: number = 0;
 
   async function listItens() {
     setLoading(true);
-    const getItem = await storageGetAll();
-    const cartItems = await getMultiple(getItem);
-    const mountItems = cartItems.map((item: any[]) => {
+    const getKeys = await storageGetAll();
+
+    const cartItems = await getMultiple(getKeys);
+    const mountItems: any = cartItems.map((item: any[]) => {
       return {...JSON.parse(item[1])};
     });
 
-    mountItems.map(item => {
+    mountItems.map((item: any) => {
       quantity = item.quantity + quantity;
       value = item.priceMember * item.quantity + value;
     });
+
     setTotalValue(value);
     setTotalItems(quantity);
     setGetItems(mountItems);
     setLoading(false);
   }
 
-  async function setItem(data: any, key: string) {
+  async function setItem(data: IBodyProps, key: string) {
     setLoading(true);
-    const item: string | any = await storageGetItem(String(data.id));
+    const item: any = await storageGetItem(String(data.id));
 
     const parseItem = JSON.parse(item);
 
@@ -53,7 +55,7 @@ export default function useCheckout() {
       ? data.quantity + 1
       : 1;
 
-    const body = {
+    const body: IBodyProps = {
       id: parseItem ? parseItem.id : data.id,
       image: parseItem ? parseItem.image : data.image,
       name: parseItem ? parseItem.name : data.name,
@@ -65,6 +67,7 @@ export default function useCheckout() {
         : data.priceNonMember,
       priceMember: parseItem ? parseItem.priceMember : data.priceMember,
       quantity: key === 'remove' ? removeQuantityItem : setQuantityItem,
+      size: undefined,
     };
 
     await storageSetItem(String(body.id), body);

@@ -42,7 +42,7 @@ import {ActivityIndicator, FlatList, Modal, StyleSheet} from 'react-native';
 import Cupon from '../../components/Cupon';
 import {storageClear} from '../../utils/AsyncStorage';
 import useCheckout from '../../hooks/useCheckout';
-import {IBodyProps} from '../../types/checkout.types';
+// import {IBodyProps} from '../../types/checkout.types';
 
 const Checkout: React.FC = () => {
   const navigation = useNavigation();
@@ -51,7 +51,7 @@ const Checkout: React.FC = () => {
 
   const [visibleCupon, setVisibleCupon] = useState(false);
 
-  function onPressAddItem(data: IBodyProps, key: string) {
+  function onPressAddItem(data: any, key: string) {
     if (data.quantity >= 1) {
       setItem(data, key);
       return listItens();

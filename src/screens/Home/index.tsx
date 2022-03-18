@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-
+import {NavigationProp, useNavigation} from '@react-navigation/native';
 import Product from '../../components/Product';
-
 import useFetchProduct from '../../hooks/useFetchProduct';
-
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -27,29 +24,31 @@ import {
 import {Colors} from '../../config/Colors';
 import useCheckout from '../../hooks/useCheckout';
 
+type Navigate = {navigate(): void};
+
 const Home: React.FC = () => {
   const {products, numberProduct, loadProducts, loadingProducts} =
     useFetchProduct();
   const {totalItems, listItens, setItem, loading} = useCheckout();
-  const navigation: string | any = useNavigation();
+  const navigation = useNavigation<NavigationProp<Navigate>>();
   const [limit, setLimit] = useState(10);
 
   useEffect(() => {
     loadProducts('');
   }, []);
 
-  function onPressAddItem(data: any, key: string) {
-    setItem(data, key);
-    return listItens();
+  async function onPressAddItem(data: any, key: string) {
+    await setItem(data, key);
+    await listItens();
   }
 
-  function getMoreProducts() {
+  async function getMoreProducts() {
     setLimit(limit + 10);
 
-    return loadProducts('', 1, limit);
+    await loadProducts('', 1, limit);
   }
 
-  if (loading && products.length === 0) {
+  if (loadingProducts || products.length === 0) {
     return (
       <ViewLoadingPage>
         <ActivityIndicator size={40} color={Colors.blackSearch} />

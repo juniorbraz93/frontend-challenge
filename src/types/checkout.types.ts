@@ -10,8 +10,3 @@ export interface IBodyProps {
   priceMember: number;
   quantity: number;
 }
-
-export interface ISetItemProps {
-  data: any;
-  key?: string;
-}
