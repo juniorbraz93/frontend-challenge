@@ -35,7 +35,7 @@ export default function useCheckout() {
     setLoading(false);
   }
 
-  async function setItem(data: IBodyProps, key: string) {
+  async function setItem(data: any, key: string) {
     setLoading(true);
     const item: string | any = await storageGetItem(String(data.id));
 
@@ -53,7 +53,7 @@ export default function useCheckout() {
       ? data.quantity + 1
       : 1;
 
-    const body: IBodyProps = {
+    const body = {
       id: parseItem ? parseItem.id : data.id,
       image: parseItem ? parseItem.image : data.image,
       name: parseItem ? parseItem.name : data.name,
