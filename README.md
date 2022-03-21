@@ -22,3 +22,14 @@ ou
 ```shell
 yarn
 ```
+### Build no android
+
+```shell
+npx react-native run-android
+```
+
+ou
+
+```shell
+yarn android 
+```
