@@ -22,7 +22,7 @@ ou
 ```shell
 yarn
 ```
-### Build no android
+### Build no android *
 
 ```shell
 npx react-native run-android
