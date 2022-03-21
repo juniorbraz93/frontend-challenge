@@ -1,4 +1,4 @@
-# 🚀 Desafio do projeto da Wine de react Native
+# 🚀 Desafio do projeto da Wine de React Native
 
 
 
@@ -22,7 +22,7 @@ ou
 ```shell
 yarn
 ```
-### Build no android *
+### Build no android 
 
 ```shell
 npx react-native run-android
