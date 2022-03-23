@@ -33,3 +33,11 @@ ou
 ```shell
 yarn android 
 ```
+
+### Iniciar o Projeto 
+
+
+```shell
+yarn start 
+```
+
